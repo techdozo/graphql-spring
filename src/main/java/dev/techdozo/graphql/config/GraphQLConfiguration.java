@@ -1,4 +1,4 @@
-package dev.techdozo.graphql.controller;
+package dev.techdozo.graphql.config;
 
 import dev.techdozo.graphql.domain.service.BookCatalogService;
 import org.springframework.context.annotation.Bean;
@@ -13,19 +13,17 @@ public class GraphQLConfiguration {
 
     return builder -> {
       builder.type(
-          "Books",
-          wiring ->
-              wiring.dataFetcher("ratings", env -> bookCatalogService.ratings(env.getSource())));
-      builder.type(
           "Query",
           wiring ->
               wiring
+                  .dataFetcher("books", environment -> bookCatalogService.getBooks())
                   .dataFetcher(
                       "bookById",
-                      environment ->
-                          bookCatalogService.bookById(
-                              Integer.parseInt(environment.getArgument("id"))))
-                  .dataFetcher("books", environment -> bookCatalogService.getBooks()));
+                      env -> bookCatalogService.bookById(Integer.parseInt(env.getArgument("id")))));
+      builder.type(
+          "Book",
+          wiring ->
+              wiring.dataFetcher("ratings", env -> bookCatalogService.ratings(env.getSource())));
     };
   }
 }

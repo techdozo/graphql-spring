@@ -1,7 +1,3 @@
-type Mutation {
-    addBook(name: String!, author: String!, price: String) : Book!
-}
-
 type Query {
     books: [Book]
     bookById(id : ID) : Book
@@ -19,5 +15,5 @@ type Rating {
     id: ID
     rating: Int
     comment: String
-    userId: String
+    user: String
 }

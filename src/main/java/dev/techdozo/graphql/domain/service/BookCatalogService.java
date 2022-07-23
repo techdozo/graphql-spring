@@ -1,5 +1,7 @@
 package dev.techdozo.graphql.domain.service;
 
+import dev.techdozo.graphql.domain.model.Book;
+import dev.techdozo.graphql.domain.model.Rating;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -40,6 +42,4 @@ public class BookCatalogService {
         return bookRepository.get(id);
     }
 }
-
-record Rating(Integer id, Integer bookId, Integer rating, String comment, String user){}
 
